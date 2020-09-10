@@ -7,29 +7,20 @@ namespace CSharp_ALGORITHM
     {
         static void Main(string[] args)
         {
-            //Question
-            //Trolls are attacking your comment section!
-
-            //A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
-
-            //Your task is to write a function that takes a string and return a new string with all vowels removed.
-
-            //For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
-            string result =Disemvowel("This website is for losers LOL!");
+           //Question
+           //Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+           string result = PigIt("Pig latin is cool");
             Console.WriteLine(result);
         }
-        public static string Disemvowel(string str)
+        public static string PigIt(string str)
         {
-            string vowels = "aeiouAEIOU";
-            string result = "";
-            for (int i = 0; i < str.Length; i++)
+            string[] result = str.Split(' ');
+            string newresult = "";
+            for (int i = 0; i < result.Length; i++)
             {
-                if (!vowels.Contains(str[i]))
-                {
-                    result += str[i];
-                }
+                newresult += result[i].Substring(1, result[i].Length - 1) + result[i].Substring(0, 1) + "ay ";
             }
-            return result;
+            return newresult.Trim();
         }
     }
 }
