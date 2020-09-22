@@ -7,61 +7,61 @@ namespace CSharp_ALGORITHM
     {
         static void Main(string[] args)
         {
-            //Question
-            //You live in the city of Cartesia where all roads are laid out in a perfect grid.You arrived ten minutes too early 
-            //to an appointment, so you decided to take the opportunity to go for a short walk.The city provides its citizens with 
-            //a Walk Generating App on their phones-- everytime you press the button it sends you an array of one - letter strings
-            //representing directions to walk(eg. ['n', 's', 'w', 'e']).You always walk only a single block for each letter (direction)
-            //and you know it takes you one minute to traverse one city block, so create a function that will return true if the walk
-            //the app gives you will take you exactly ten minutes(you don't want to be early or late!) and will, of course, return you
-            //to your starting point. Return false otherwise.
+            //ROMAN NUMERAL DECODER
+            //Create a function that takes a Roman numeral as its argument and returns its value as a numeric decimal integer.
+            //You don't need to validate the form of the Roman numeral.
+
+            //Modern Roman numerals are written by expressing each decimal digit of the number to be encoded separately, 
+            //starting with the leftmost digit and skipping any 0s.So 1990 is rendered "MCMXC"(1000 = M, 900 = CM, 90 = XC) 
+            //and 2008 is rendered "MMVIII"(2000 = MM, 8 = VIII).The Roman numeral for 1666, "MDCLXVI", uses each letter in 
+            //descending order.
+
+            //Example:
 
 
-            //Note: you will always receive a valid array containing a random assortment of direction letters('n', 's', 'e', or 'w'
-            //only).It will never give you an empty array(that's not a walk, that's standing still!).
-            string[] walk = new string[] { "n", "s", "n", "s", "n", "s", "n", "s", "n", "s" };
+            //RomanDecode.Solution("XXI")-- should return 21
+            //Help:
 
-            int distanceawayNorth = 0;
-            int distanceawayWest = 0;
-            bool result = false;
+            //Symbol Value
+            //I          1
+            //V          5
+            //X          10
+            //L          50
+            //C          100
+            //D          500
+            //M          1,000
 
-            //insert brilliant code here
-            
-            
-            
-            if (walk.Length != 10)
+            string roman = "CMXL";
+            var dict = new Dictionary<string, int>();
+            dict.Add("I", 1);
+            dict.Add("V", 5);
+            dict.Add("X", 10);
+            dict.Add("L", 50);
+            dict.Add("C", 100);
+            dict.Add("D", 500);
+            dict.Add("M", 1000);
+            dict.Add("IV", 4);
+            dict.Add("IX", 9);
+            dict.Add("XL", 40);
+            dict.Add("XC", 90);
+            dict.Add("CM", 900);
+            dict.Add("CD", 500);
+
+
+
+            int result = 0;
+            var oddone = new string[] { "IV", "IX", "XL", "XC", "CM", "CD" };
+            for (int i = 0; i < oddone.Length; i++)
             {
-                result = false;
-            }
-            else
-            {
-                foreach (var item in walk)
+                if (roman.Contains(oddone[i]))
                 {
-                    if (item == "n")
-                    {
-                        distanceawayNorth++;
-                    }
-                    else if (item == "w")
-                    {
-                        distanceawayWest++;
-                    }
-
-
-                    else if (item == "s")
-                    {
-                        distanceawayNorth--;
-                    }
-                    else
-                    {
-                        distanceawayWest--;
-                    }
+                    roman = roman.Replace(oddone[i], "");
+                    result += dict[oddone[i]];
                 }
-
-
             }
-            if (distanceawayNorth == 0 && distanceawayWest == 0)
+            for (int i = 0; i < roman.Length; i++)
             {
-                result = true;
+                result += dict[roman[i].ToString()];
             }
             Console.WriteLine(result);
         }
